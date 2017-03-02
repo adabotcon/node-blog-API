@@ -7,11 +7,14 @@ const jsonParser = bodyParser.json();
 
 const {BlogPosts} = require('./models');
 
-router.get('/blog-posts', (req, res) => {
+BlogPosts.create('Example', 'This is an example post.', 'adabotcon', '11/21');
+BlogPosts.create('Example 2', 'This is an example post v2.', 'adabotcon', '11/22');
+
+router.get('/', (req, res) => {
 	res.json(BlogPosts.get());
 });
 
-router.post('/blog-posts', jsonParser, (req, res) => {
+router.post('/', jsonParser, (req, res) => {
 	//ensure correct info
 	const requiredFields = ['title', 'content', 'author', 'publishDate'];
 	for (let i=0; i<requiredFields.length; i++) {
@@ -26,7 +29,7 @@ router.post('/blog-posts', jsonParser, (req, res) => {
   res.status(201).json(item);
 });
 
-router.put('blog-posts/:id', jsonParser, (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
   const requiredFields = ['title', 'content', 'author', 'publishDate', 'id'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -54,8 +57,10 @@ router.put('blog-posts/:id', jsonParser, (req, res) => {
   res.status(204).json(updatedItem);
 });
 
-router.delete('/blog-posts/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   ShoppingList.delete(req.params.id);
   console.log(`Deleted blogpost \`${req.params.ID}\``);
   res.status(204).end();
 });
+
+module.exports = router;
