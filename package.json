@@ -1,0 +1,11 @@
+{
+  "name": "node-blog-api",
+  "version": "1.0.0",
+  "description": "Back end for a blog API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "adabotcon",
+  "license": "ISC"
+}
